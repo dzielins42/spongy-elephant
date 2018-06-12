@@ -1,22 +1,19 @@
 package pl.dzielins42.dmtools.generator.name;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
 
-public class StringArrayNameGenerator extends BaseNameGenerator {
+public class ProbabilityNameGenerator extends BaseNameGenerator {
 
-    private String[] values;
+    private NameGenerator[] values;
     private double[] probabilities;
 
-    public StringArrayNameGenerator(String[] values) {
+    public ProbabilityNameGenerator(NameGenerator[] values) {
         this.values = values;
         this.probabilities = new double[this.values.length];
         Arrays.fill(this.probabilities, 1.0d / this.values.length);
     }
 
-    public StringArrayNameGenerator(String[] values, double[] probabilities) {
+    public ProbabilityNameGenerator(NameGenerator[] values, double[] probabilities) {
         if (values == null) {
             throw new IllegalArgumentException("Values cannot be null");
         }
@@ -40,13 +37,13 @@ public class StringArrayNameGenerator extends BaseNameGenerator {
         for (int i = 0; i < probabilities.length; i++) {
             sum += probabilities[i];
             if (randomValue < sum) {
-                return values[i];
+                return values[i].generate(options);
             }
         }
 
         // Should not happen, but may be caused by floating point inequality
         // problem
-        return values[values.length - 1];
+        return values[values.length - 1].generate(options);
     }
 
     private double[] normalize(double[] values) throws IllegalArgumentException {
