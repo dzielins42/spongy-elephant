@@ -5,18 +5,18 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-public class ArrayNameGenerator implements NameGenerator {
+public class StringArrayNameGenerator implements NameGenerator {
 
     private String[] values;
     private double[] probabilities;
 
-    public ArrayNameGenerator(String[] values) {
+    public StringArrayNameGenerator(String[] values) {
         this.values = values;
         this.probabilities = new double[this.values.length];
         Arrays.fill(this.probabilities, 1.0d / this.values.length);
     }
 
-    public ArrayNameGenerator(String[] values, double[] probabilities) {
+    public StringArrayNameGenerator(String[] values, double[] probabilities) {
         if (values == null) {
             throw new IllegalArgumentException("Values cannot be null");
         }

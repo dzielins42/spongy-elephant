@@ -14,7 +14,7 @@ import java.util.Collection;
 import java.util.Random;
 
 @RunWith(Parameterized.class)
-public class ArrayNameGeneratorTest {
+public class StringArrayNameGeneratorTest {
 
     private static final long SEED = 42L;
     private static final String[] VALUES = new String[]{
@@ -31,17 +31,17 @@ public class ArrayNameGeneratorTest {
     private String[] values;
     private double[] probabilities;
 
-    private ArrayNameGenerator generator;
+    private StringArrayNameGenerator generator;
     private NameGeneratorOptions options;
 
-    public ArrayNameGeneratorTest(String[] values, double[] probabilities) {
+    public StringArrayNameGeneratorTest(String[] values, double[] probabilities) {
         this.values = values;
         this.probabilities = probabilities;
     }
 
     @Before
     public void setUp() throws Exception {
-        generator = new ArrayNameGenerator(values, probabilities);
+        generator = new StringArrayNameGenerator(values, probabilities);
         options = new NameGeneratorOptions(new RandomAdapter(new Random(SEED)));
     }
 
