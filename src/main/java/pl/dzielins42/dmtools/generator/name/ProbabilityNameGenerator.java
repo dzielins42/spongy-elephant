@@ -4,16 +4,16 @@ import java.util.Arrays;
 
 public class ProbabilityNameGenerator extends BaseNameGenerator {
 
-    private NameGenerator[] values;
+    private NameGeneratorItem[] values;
     private double[] probabilities;
 
-    public ProbabilityNameGenerator(NameGenerator[] values) {
+    public ProbabilityNameGenerator(NameGeneratorItem[] values) {
         this.values = values;
         this.probabilities = new double[this.values.length];
         Arrays.fill(this.probabilities, 1.0d / this.values.length);
     }
 
-    public ProbabilityNameGenerator(NameGenerator[] values, double[] probabilities) {
+    public ProbabilityNameGenerator(NameGeneratorItem[] values, double[] probabilities) {
         if (values == null) {
             throw new IllegalArgumentException("Values cannot be null");
         }
@@ -37,13 +37,13 @@ public class ProbabilityNameGenerator extends BaseNameGenerator {
         for (int i = 0; i < probabilities.length; i++) {
             sum += probabilities[i];
             if (randomValue < sum) {
-                return values[i].generate(options);
+                return values[i].value(options);
             }
         }
 
         // Should not happen, but may be caused by floating point inequality
         // problem
-        return values[values.length - 1].generate(options);
+        return values[values.length - 1].value(options);
     }
 
     private double[] normalize(double[] values) throws IllegalArgumentException {

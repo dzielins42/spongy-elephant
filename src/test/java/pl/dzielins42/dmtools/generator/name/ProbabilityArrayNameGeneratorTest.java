@@ -14,11 +14,11 @@ import java.util.Collection;
 import java.util.Random;
 
 @RunWith(Parameterized.class)
-public class StringArrayNameGeneratorTest {
+public class ProbabilityArrayNameGeneratorTest {
 
     private static final long SEED = 42L;
-    private static final String[] VALUES = new String[]{
-            "A", "B", "C", "D", "E"
+    private static final NameGeneratorItem[] VALUES = new NameGeneratorItem[]{
+            new StringNameGeneratorItem("A"), new StringNameGeneratorItem("B"), new StringNameGeneratorItem("C"), new StringNameGeneratorItem("D"), new StringNameGeneratorItem("E")
     };
 
     @Parameterized.Parameters
@@ -28,20 +28,20 @@ public class StringArrayNameGeneratorTest {
         });
     }
 
-    private String[] values;
+    private NameGeneratorItem[] values;
     private double[] probabilities;
 
-    private StringArrayNameGenerator generator;
+    private ProbabilityNameGenerator generator;
     private NameGeneratorOptions options;
 
-    public StringArrayNameGeneratorTest(String[] values, double[] probabilities) {
+    public ProbabilityArrayNameGeneratorTest(NameGeneratorItem[] values, double[] probabilities) {
         this.values = values;
         this.probabilities = probabilities;
     }
 
     @Before
     public void setUp() throws Exception {
-        generator = new StringArrayNameGenerator(values, probabilities);
+        generator = new ProbabilityNameGenerator(values, probabilities);
         options = new NameGeneratorOptions(new RandomAdapter(new Random(SEED)));
     }
 
